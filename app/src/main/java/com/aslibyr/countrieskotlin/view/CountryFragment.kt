@@ -6,12 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.aslibyr.countrieskotlin.R
 import com.aslibyr.countrieskotlin.databinding.FragmentCountryBinding
-import com.aslibyr.countrieskotlin.databinding.FragmentFeedBinding
+import com.aslibyr.countrieskotlin.model.Country
 import com.aslibyr.countrieskotlin.viewmodel.CountryViewModel
 
 
@@ -19,7 +16,7 @@ class CountryFragment : Fragment() {
     private var _binding: FragmentCountryBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: CountryViewModel
-    private var countryUuid = 0
+    private var countryUuid : Country? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

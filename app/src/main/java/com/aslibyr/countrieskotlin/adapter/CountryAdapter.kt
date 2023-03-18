@@ -11,7 +11,6 @@ import com.aslibyr.countrieskotlin.R
 import com.aslibyr.countrieskotlin.model.Country
 import com.aslibyr.countrieskotlin.util.downloadFromUrl
 import com.aslibyr.countrieskotlin.util.placeHolderProgressBar
-import com.aslibyr.countrieskotlin.view.CountryFragment
 import com.aslibyr.countrieskotlin.view.FeedFragmentDirections
 
 class CountryAdapter(val countryList: ArrayList<Country>) :
@@ -26,17 +25,17 @@ class CountryAdapter(val countryList: ArrayList<Country>) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): CountryAdapter.CountryViewHolder {
+    ): CountryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.row, parent, false)
         return CountryViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: CountryAdapter.CountryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
         holder.textName.text = countryList[position].countryName
         holder.textRegion.text = countryList[position].countryRegion
         holder.view.setOnClickListener {
-            val action = FeedFragmentDirections.actionFeedToCountry()
+            val action = FeedFragmentDirections.actionFeedToCountry(countryList[position])
             Navigation.findNavController(it).navigate(action)
         }
         holder.imageView.downloadFromUrl(countryList[position].imageUrl, placeHolderProgressBar(holder.view.context))
