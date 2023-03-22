@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.aslibyr.countrieskotlin.model.Country
+
 @Database(entities = arrayOf(Country::class), version = 1)
 abstract class CountryDatabase : RoomDatabase() {
 

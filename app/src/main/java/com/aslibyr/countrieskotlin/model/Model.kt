@@ -24,9 +24,10 @@ data class Country(
     val countryLanguage: String?,
     @ColumnInfo("flag")
     @SerializedName("flag")
-    val imageUrl: String?
-) : java.io.Serializable
+    val imageUrl: String?) {
+    @PrimaryKey(autoGenerate = true)
+    var uuid: Int = 0
+}
 
-@PrimaryKey(autoGenerate = true)
-var uuid: Int = 0
+
 

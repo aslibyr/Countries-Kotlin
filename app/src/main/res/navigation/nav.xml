@@ -24,7 +24,8 @@
             app:destination="@id/feed" />
         <argument
             android:name="countryUuid"
-            app:argType="com.aslibyr.countrieskotlin.model.Country"
+            app:argType="integer"
+            android:defaultValue="0"
              />
     </fragment>
 </navigation>
