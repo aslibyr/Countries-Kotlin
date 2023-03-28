@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.aslibyr.countrieskotlin.databinding.FragmentCountryBinding
 import com.aslibyr.countrieskotlin.model.Country
+import com.aslibyr.countrieskotlin.util.downloadFromUrl
+import com.aslibyr.countrieskotlin.util.placeHolderProgressBar
 import com.aslibyr.countrieskotlin.viewmodel.CountryViewModel
 
 
@@ -16,7 +18,7 @@ class CountryFragment : Fragment() {
     private var _binding: FragmentCountryBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: CountryViewModel
-    private var countryUuid : Country? = null
+    private var countryUuid  = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,14 +34,15 @@ class CountryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel = ViewModelProviders.of(this).get(CountryViewModel::class.java)
-        viewModel.getDataFromRoom()
-
-
         arguments?.let {
             countryUuid = CountryFragmentArgs.fromBundle(it).countryUuid
         }
+
+        viewModel = ViewModelProviders.of(this).get(CountryViewModel::class.java)
+        viewModel.getDataFromRoom(countryUuid)
+
+
+
         observeLiveData()
     }
     private fun observeLiveData(){
@@ -50,6 +53,10 @@ class CountryFragment : Fragment() {
                 binding.countryCapital.text = country.countryCapital
                 binding.countryCurrency.text = country.countryCurrency
                 binding.countryLanguage.text = country.countryLanguage
+                context?.let{
+                    binding.countryImage.downloadFromUrl(country.imageUrl, placeHolderProgressBar(it))
+
+                }
             }
         })
     }
