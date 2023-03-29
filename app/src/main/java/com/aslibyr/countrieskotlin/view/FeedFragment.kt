@@ -1,16 +1,12 @@
 package com.aslibyr.countrieskotlin.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aslibyr.countrieskotlin.adapter.CountryAdapter
 import com.aslibyr.countrieskotlin.databinding.FragmentFeedBinding
 import com.aslibyr.countrieskotlin.viewmodel.FeedViewModel
@@ -21,11 +17,6 @@ class FeedFragment : Fragment() {
 
     private var _binding: FragmentFeedBinding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +30,7 @@ class FeedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        viewModel = ViewModelProviders.of(this).get(FeedViewModel::class.java)
+        viewModel = ViewModelProviders.of(this)[FeedViewModel::class.java]
         viewModel.refreshData()
 
         binding.countryList.layoutManager = LinearLayoutManager(context)
@@ -58,13 +49,13 @@ class FeedFragment : Fragment() {
 
 
     private fun observeLiveData() {
-        viewModel.countries.observe(viewLifecycleOwner, Observer { countries ->
+        viewModel.countries.observe(viewLifecycleOwner) { countries ->
             countries?.let {
                 binding.countryList.visibility = View.VISIBLE
                 countryAdapter.updateCountryList(countries)
             }
-        })
-        viewModel.countryError.observe(viewLifecycleOwner, Observer { error ->
+        }
+        viewModel.countryError.observe(viewLifecycleOwner) { error ->
             error?.let {
                 if (it) {
                     binding.countryError.visibility = View.VISIBLE
@@ -72,8 +63,8 @@ class FeedFragment : Fragment() {
                     binding.countryError.visibility = View.GONE
                 }
             }
-        })
-        viewModel.countryLoading.observe(viewLifecycleOwner, Observer { loading ->
+        }
+        viewModel.countryLoading.observe(viewLifecycleOwner) { loading ->
             loading?.let {
                 if (it) {
                     binding.countryLoading.visibility = View.VISIBLE
@@ -84,6 +75,6 @@ class FeedFragment : Fragment() {
 
                 }
             }
-        })
+        }
     }
 }

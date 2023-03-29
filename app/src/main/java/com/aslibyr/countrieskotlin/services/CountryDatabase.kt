@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.aslibyr.countrieskotlin.model.Country
 
-@Database(entities = arrayOf(Country::class), version = 1, exportSchema = true)
+@Database(entities = arrayOf(Country::class), version = 1, exportSchema = false)
 abstract class CountryDatabase : RoomDatabase() {
 
     abstract fun countryDao(): CountryDao

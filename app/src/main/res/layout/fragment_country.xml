@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    
+    <data>
+        <variable
+            name="selectedCountry"
+            type="com.aslibyr.countrieskotlin.model.Country" />
+        
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:downloadUrl="@{selectedCountry.imageUrl}"
             android:layout_margin="20dp"
             android:minHeight="200dp"
             android:scaleType="fitCenter" />
@@ -23,7 +31,7 @@
             android:layout_below="@+id/countryImage"
             android:layout_centerHorizontal="true"
             android:layout_margin="7dp"
-            android:text="country name"
+            android:text="@{selectedCountry.countryName}"
             android:textSize="20sp"
             android:textStyle="bold|italic" />
 
@@ -34,7 +42,7 @@
             android:layout_below="@id/countryName"
             android:layout_centerHorizontal="true"
             android:layout_margin="7dp"
-            android:text="Country Capital"
+            android:text="@{selectedCountry.countryCapital}"
             android:textSize="16sp"
             android:textStyle="italic|normal" />
 
@@ -45,7 +53,7 @@
             android:layout_below="@id/countryCapital"
             android:layout_centerHorizontal="true"
             android:layout_margin="7dp"
-            android:text="Country Region"
+            android:text="@{selectedCountry.countryRegion}"
             android:textSize="16sp"
             android:textStyle="italic|normal" />
 
@@ -56,7 +64,7 @@
             android:layout_below="@id/countryRegion"
             android:layout_centerHorizontal="true"
             android:layout_margin="7dp"
-            android:text="Country Currency"
+            android:text="@{selectedCountry.countryCurrency}"
             android:textSize="16sp"
             android:textStyle="italic|normal" />
         <TextView
@@ -65,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="7dp"
-            android:text="Country Language"
+            android:text="@{selectedCountry.countryLanguage}"
             android:layout_centerHorizontal="true"
             android:textSize="16sp"
             android:textStyle="italic|normal"/>
